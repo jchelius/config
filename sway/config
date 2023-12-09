@@ -19,20 +19,24 @@ set $term alacritty
 # Note: pass the final command to swaymsg so that the resulting window can be opened
 # on the original workspace that the command was run on.
 # set $menu dmenu_path | wofi --show run | xargs swaymsg exec --
-
-set $menu "pgrep -x wofi >/dev/null 2>&1 && killall wofi || wofi --dmenu --show drun"
+set $menu pgrep -x wofi >/dev/null 2>&1 && killall wofi || wofi --dmenu --show run | xargs swaymsg exec
 
 ### Output configuration
 #
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
 # output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
-output * bg ~/desktop-backgrounds/fantasy-planets-in-space.jpg fill
+output * bg ~/desktop-backgrounds/evergreens.jpg fill
 #
 # Example configuration:
 #
 #   output HDMI-A-1 resolution 1920x1080 position 1920,0
 #
 # You can get the names of your outputs by running: swaymsg -t get_outputs
+
+output DP-3 resolution 2560x1440 position 0,0 transform 270
+output DP-2 adaptive_sync on resolution 2660x1440 position 1440,550 transform 0
+
+workspace 1 output DP-3
 
 ### Idle configuration
 #
@@ -60,15 +64,6 @@ exec swayidle -w \
 #
 # You can get the names of your inputs by running: swaymsg -t get_inputs
 # Read `man 5 sway-input` for more information about this section.
-
-input "2:10:TPPS/2_IBM_TrackPoint" {
-	dwt enabled
-	tap disabled
-	natural_scroll disabled
-	accel_profile "flat"
-	pointer_accel 0.1
-	scroll_factor 0.2
-}
 
 ### Key bindings
 #
@@ -217,31 +212,30 @@ bar {
 
     # When the status_command prints a new line to stdout, swaybar updates.
     # The default just shows the current date and time.
-    # status_command while date +'%Y-%m-%d %I:%M:%S %p'; do sleep 1; done
-    status_command SCRIPT_DIR=~/.config/i3blocks i3blocks
+    status_command while date +'%Y-%m-%d %I:%M:%S %p'; do sleep 1; done
 
     colors {
         statusline #ffffff
         background #323232
-#        inactive_workspace #32323200 #32323200 #5c5c5c
+      #  inactive_workspace #32323200 #32323200 #5c5c5c
     }
 }
 
-include /etc/sway/config.d/*
+include ~/.config/sway/config.d/*
 
-exec gnome-keyring-daemon --start
+# Media Controls
+bindsym XF86AudioPlay exec playerctl play-pause
+bindsym XF86AudioPause exec playerctl play-pause
+bindsym XF86AudioNext exec playerctl next
+bindsym XF86AudioPrev exec playerctl previous
 
 # Volume Controls
-bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5% && pkill -RTMIN+10 i3blocks
-bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5% && pkill -RTMIN+10 i3blocks
-bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle && pkill -RTMIN+10 i3blocks
-bindsym XF86AudioMicMute exec pactl set-source-mute @DEFAULT_SOURCE@ toggle && pkill -RTMIN+10 i3blocks
+bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5%
+bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5%
+bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
 
-#Brightness controls
-bindsym XF86MonBrightnessUp exec light -A 10 && pkill -RTMIN+11 i3blocks
-bindsym XF86MonBrightnessDown exec light -U 10 && pkill -RTMIN+11 i3blocks
+# Hack to get firefox to use wayland
+# exec export MOZ_ENABLE_WAYLAND=1
 
-exec --no-startup-id /usr/lib/xdg-desktop-portal -r
-
-exec systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK 
-exec hash dbus-update-activation-environment 2>/dev/null && dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK 
+# take screenshot and copy to clipboard
+bindsym $mod+p exec grim -g "$(slurp -d)" - | wl-copy
