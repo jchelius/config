@@ -25,10 +25,17 @@ else:
     state_batteries=[]
     commasplitstatus_batteries=[]
     percentleft_batteries=[]
+    design_capacities = []
     time = ""
-    for battery in batteries:
+    for i in range(len(batteries)):
+        battery = batteries[i]
         if battery!='':
             state_batteries.append(battery.split(": ")[1].split(", ")[0])
+            # battery_number = battery[0].split(" ")[1]
+            battery_details = check_output(["upower", "-i", f"/org/freedesktop/UPower/devices/battery_BAT{i}"], universal_newlines=True)
+            design_capacity_loc = battery_details.find("energy-full")
+            design_capacity = 0 if design_capacity_loc == -1 else float(battery_details[design_capacity_loc:].split()[1])
+            design_capacities.append(design_capacity)
             commasplitstatus = battery.split(", ")
             if not time:
                 time = commasplitstatus[-1].strip()
@@ -43,13 +50,22 @@ else:
             if p>0:
                 percentleft_batteries.append(p)
             commasplitstatus_batteries.append(commasplitstatus)
-    state = state_batteries[-1]
+    state = "Unknown"
     commasplitstatus = commasplitstatus_batteries[0]
-    if percentleft_batteries:
-        percentleft = int(sum(percentleft_batteries)/len(percentleft_batteries))
-    else:
-        percentleft = 0
-
+    percentleft = 0
+    total_design_capacity = sum(design_capacities)
+    for i in range(len(percentleft_batteries)):
+        # state = percentleft_batteries[-1]
+        state_i = commasplitstatus_batteries[i][0].split()[2]
+        if state_i == "Discharging" or state_i == "Charging":
+            state = state_i
+        # state = commasplitstatus_batteries[0].split()[2] == "Charging"
+        # percentleft = int(sum(percentleft_batteries)/len(percentleft_batteries))
+        percentleft += design_capacities[i]*percentleft_batteries[i]/total_design_capacity
+    if state == "Unknown":
+        state = commasplitstatus_batteries[-1].split()[2] if percentleft_batteries else "Unknown"
+    percentleft = int(round(float(percentleft)))
+    # print(design_capacities, percentleft_batteries, total_design_capacity)
     # stands for charging
     color = config.get("color_charging", "yellow")
     FA_LIGHTNING = "<span color='{}'><span font='FontAwesome'>\uf0e7</span></span>".format(color)

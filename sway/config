@@ -20,13 +20,13 @@ set $term alacritty
 # on the original workspace that the command was run on.
 # set $menu dmenu_path | wofi --show run | xargs swaymsg exec --
 
-set $menu "pgrep -x wofi >/dev/null 2>&1 && killall wofi || wofi --dmenu --show drun"
+set $menu "pgrep -x wofi >/dev/null 2>&1 && killall wofi || wofi -G --dmenu --show run"
 
 ### Output configuration
 #
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
 # output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
-output * bg ~/desktop-backgrounds/fantasy-planets-in-space.jpg fill
+output * bg ~/desktop-backgrounds/GalacticCenter_desktop.png fill
 #
 # Example configuration:
 #
@@ -232,8 +232,8 @@ include /etc/sway/config.d/*
 exec gnome-keyring-daemon --start
 
 # Volume Controls
-bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5% && pkill -RTMIN+10 i3blocks
-bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5% && pkill -RTMIN+10 i3blocks
+bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +1% && pkill -RTMIN+10 i3blocks
+bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -1% && pkill -RTMIN+10 i3blocks
 bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle && pkill -RTMIN+10 i3blocks
 bindsym XF86AudioMicMute exec pactl set-source-mute @DEFAULT_SOURCE@ toggle && pkill -RTMIN+10 i3blocks
 
@@ -245,3 +245,5 @@ exec --no-startup-id /usr/lib/xdg-desktop-portal -r
 
 exec systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK 
 exec hash dbus-update-activation-environment 2>/dev/null && dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK 
+
+bindsym $mod+p exec grim -g "$(slurp)" - | wl-copy 
