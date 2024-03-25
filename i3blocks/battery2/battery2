@@ -63,7 +63,7 @@ else:
         # percentleft = int(sum(percentleft_batteries)/len(percentleft_batteries))
         percentleft += design_capacities[i]*percentleft_batteries[i]/total_design_capacity
     if state == "Unknown":
-        state = commasplitstatus_batteries[-1].split()[2] if percentleft_batteries else "Unknown"
+        state = commasplitstatus_batteries[-1][0].split()[2] if percentleft_batteries else "Unknown"
     percentleft = int(round(float(percentleft)))
     # print(design_capacities, percentleft_batteries, total_design_capacity)
     # stands for charging

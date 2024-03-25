@@ -51,6 +51,10 @@ command=~/.config/i3blocks/battery2/battery2
 markup=pango
 interval=30
 
+#[battery]
+#command=~/.config/i3blocks/battery/battery
+#interval=30
+
 [time]
 command=date +'%Y-%m-%d %I:%M:%S %p'
 interval=1
