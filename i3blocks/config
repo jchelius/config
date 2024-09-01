@@ -1,7 +1,7 @@
 [mediaplayer]
 command=~/.config/i3blocks/mediaplayer/mediaplayer
 instance=spotify
-interval=5
+interval=1
 signal=10
 
 [miccontrol]
