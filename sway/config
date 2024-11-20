@@ -64,10 +64,10 @@ exec swayidle -w \
 input "2:10:TPPS/2_IBM_TrackPoint" {
 	dwt enabled
 	tap disabled
-	natural_scroll disabled
-	accel_profile "flat"
+	# natural_scroll disabled
+	# accel_profile "flat"
 	pointer_accel 0.1
-	scroll_factor 0.2
+	# scroll_factor 0.2
 }
 
 ### Key bindings
@@ -104,10 +104,10 @@ input "2:10:TPPS/2_IBM_TrackPoint" {
     bindsym $mod+$up focus up
     bindsym $mod+$right focus right
     # Or use $mod+[up|down|left|right]
-#   bindsym $mod+Left focus left
+    bindsym $mod+Left focus left
     bindsym $mod+Down focus down
     bindsym $mod+Up focus up
-#   bindsym $mod+Right focus right
+    bindsym $mod+Right focus right
 
     # Move the focused window with the same, but add Shift
     bindsym $mod+Shift+$left move left
@@ -237,10 +237,6 @@ bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -1% && pk
 bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle && pkill -RTMIN+10 i3blocks
 bindsym XF86AudioMicMute exec pactl set-source-mute @DEFAULT_SOURCE@ toggle && pkill -RTMIN+10 i3blocks
 
-# Track controls
-bindsym $mod+Left exec playerctl previous --player="spotify,firefox"
-bindsym $mod+Right exec playerctl next --player="spotify,firefox"
-
 #Brightness controls
 bindsym XF86MonBrightnessUp exec light -A 10 && pkill -RTMIN+11 i3blocks
 bindsym XF86MonBrightnessDown exec light -U 10 && pkill -RTMIN+11 i3blocks
@@ -251,3 +247,4 @@ exec systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK
 exec hash dbus-update-activation-environment 2>/dev/null && dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK 
 
 bindsym $mod+p exec grim -g "$(slurp)" - | wl-copy 
+bindsym $mod+Shift+p exec grim -g "$(slurp)" 
