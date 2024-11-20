@@ -157,7 +157,23 @@ vim.opt.cursorline = true
 -- Minimal number of screen lines to keep above and below the cursor.
 vim.opt.scrolloff = 10
 
--- [[ Basic Keymaps ]]
+-- Turn off LSP logging
+vim.lsp.set_log_level 'off'
+
+vim.cmd 'filetype on'
+vim.cmd 'filetype plugin on'
+vim.cmd 'filetype indent on'
+
+-- tabbing settings
+-- vim.opt.tabstop = 4
+-- vim.opt.softtabstop = 4
+-- vim.opt.shiftwidth = 4
+-- vim.opt.expandtab = true
+
+-- filetype tabbing settings
+vim.cmd 'autocmd FileType cpp setlocal shiftwidth=4 tabstop=4 softtabstop=4 expandtab'
+vim.cmd 'autocmd FileType c setlocal shiftwidth=4 tabstop=4 softtabstop=4 expandtab'
+
 --  See `:help vim.keymap.set()`
 
 -- Clear highlights on search when pressing <Esc> in normal mode
