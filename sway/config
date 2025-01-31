@@ -229,8 +229,8 @@ bar {
 include /etc/sway/config.d/*
 
 # Volume Controls
-bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +1% && pkill -RTMIN+10 i3blocks
-bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -1% && pkill -RTMIN+10 i3blocks
+bindsym XF86AudioRaiseVolume exec wpctl set-volume @DEFAULT_SINK@ 1%+ && pkill -RTMIN+10 i3blocks
+bindsym XF86AudioLowerVolume exec wpctl set-volume @DEFAULT_SINK@ 1%- && pkill -RTMIN+10 i3blocks
 bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle && pkill -RTMIN+10 i3blocks
 bindsym XF86AudioMicMute exec pactl set-source-mute @DEFAULT_SOURCE@ toggle && pkill -RTMIN+10 i3blocks
 
@@ -258,10 +258,9 @@ bindsym XF86AudioMicMute exec pactl set-source-mute @DEFAULT_SOURCE@ toggle && p
 #include ~/.config/sway/config.d/*
 #
 ## Media Controls
-bindsym XF86AudioPlay exec /usr/bin/playerctl play-pause --player="spotify,firefox"
-# bindsym XF86AudioPlay exec /usr/bin/playerctl play-pause
-bindsym XF86AudioNext exec playerctl next --player="spotify,firefox"
-bindsym XF86AudioPrev exec playerctl previous --player="spotify,firefox"
+bindsym XF86AudioPlay exec /usr/bin/playerctl play-pause
+bindsym XF86AudioNext exec playerctl next
+bindsym XF86AudioPrev exec playerctl previous
 #
 ## Volume Controls
 #bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5%
@@ -274,3 +273,5 @@ bindsym XF86AudioPrev exec playerctl previous --player="spotify,firefox"
 # take screenshot and copy to clipboard
 bindsym $mod+p exec grim -g "$(slurp -d)" - | wl-copy
 bindsym $mod+Shift+p exec grim -g "$(slurp -d)" -o "$(date +%s)" | wl-copy
+
+exec swaymsg "workspace 10; exec spotify"
