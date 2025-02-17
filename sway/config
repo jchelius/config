@@ -70,6 +70,11 @@ input "2:10:TPPS/2_IBM_TrackPoint" {
 	# scroll_factor 0.2
 }
 
+input "6940:7029:Corsair_CORSAIR_HARPOON_RGB_PRO_Gaming_Mouse" {
+    accel_profile "flat"
+    pointer_accel -0.3
+}
+
 ### Key bindings
 #
 # Basics:
@@ -222,7 +227,7 @@ bar {
 
     colors {
         statusline #ffffff
-        background #323232
+        background #000000
 #        inactive_workspace #32323200 #32323200 #5c5c5c
     }
 }
