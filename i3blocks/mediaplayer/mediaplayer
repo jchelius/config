@@ -34,7 +34,7 @@ my @metadata = ();
 my $player_arg = "";
 
 if ($BLOCK_INSTANCE) {
-    $player_arg = "--player='$BLOCK_INSTANCE'";
+    $player_arg = "";
 }
 
 sub buttons {

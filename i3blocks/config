@@ -4,6 +4,10 @@ instance=spotify
 interval=1
 signal=10
 
+[easyeffects]
+command=~/.config/i3blocks/easyeffects/getactiveeffect
+interval=10
+
 [miccontrol]
 command=~/.config/i3blocks/miccontrol/miccontrol
 #label=MIC 

@@ -19,14 +19,15 @@ set $term alacritty
 # Note: pass the final command to swaymsg so that the resulting window can be opened
 # on the original workspace that the command was run on.
 # set $menu dmenu_path | wofi --show run | xargs swaymsg exec --
-set $menu pgrep -x wofi >/dev/null 2>&1 && killall wofi || wofi -G --dmenu --show run | xargs swaymsg exec
+# set $menu pgrep -x wofi >/dev/null 2>&1 && killall wofi || wofi -G --dmenu --show run | xargs swaymsg exec
+set $menu rofi -terminal 'alacritty' -show combi -modes combi -combi-modes 'drun,run,window,ssh'
 
 ### Output configuration
 #
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
 # output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
-output DP-2 bg ~/desktop-backgrounds/space/1.jpg fill
 output DP-3 bg ~/desktop-backgrounds/space/1.jpg fill
+output DP-4 bg ~/desktop-backgrounds/space/1.jpg fill
 #
 # Example configuration:
 #
@@ -37,8 +38,14 @@ output DP-3 bg ~/desktop-backgrounds/space/1.jpg fill
 # output DP-3 resolution 2560x1440 position 0,0 transform 270 scale 1.5
 # output DP-3 resolution 2560x1440 position 0,0 transform 270 scale 1.5
 # output DP-2 adaptive_sync on resolution 2660x1440 position 960,367 transform 0 scale 1.5
-output DP-2 adaptive_sync on resolution 2660x1440 position 1440,550 transform 0
-output DP-3 resolution 2560x1440 position 0,0 transform 270
+
+# output DP-2 adaptive_sync on resolution 2660x1440 position 1440,550 transform 0
+# output DP-3 resolution 2560x1440 position 0,0 transform 270
+# output DP-3 adaptive_sync on resolution 2660x1440@165.0Hz transform 270
+# output DP-4 adaptive_sync on resolution 2560x1440@165.0Hz  position 1440 550 transform 0
+
+output DP-3 adaptive_sync on resolution 2660x1440@165.0Hz position -1440 -1250 transform 270
+output DP-4 adaptive_sync on resolution 2560x1440@165.0Hz transform 0
 
 workspace 10 output DP-3
 
@@ -221,10 +228,13 @@ bar {
 
     colors {
         statusline #ffffff
-        background #323232
-#        inactive_workspace #32323200 #32323200 #5c5c5c
-    }
+        background #000000
+        # inactive_workspace #32323200 #32323200 #5c5c5c
+     }
 }
+# bar {
+#     swaybar_command waybar
+# }
 
 include /etc/sway/config.d/*
 
@@ -263,9 +273,9 @@ bindsym XF86AudioNext exec playerctl next
 bindsym XF86AudioPrev exec playerctl previous
 #
 ## Volume Controls
-#bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5%
-#bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5%
-#bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
+# bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5%
+# bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5%
+# bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
 
 # Hack to get firefox to use wayland
 # exec export MOZ_ENABLE_WAYLAND=1
@@ -274,4 +284,4 @@ bindsym XF86AudioPrev exec playerctl previous
 bindsym $mod+p exec grim -g "$(slurp -d)" - | wl-copy
 bindsym $mod+Shift+p exec grim -g "$(slurp -d)" -o "$(date +%s)" | wl-copy
 
-exec swaymsg "workspace 10; exec spotify"
+exec playerctld daemon
