@@ -1,0 +1,3 @@
+#!/bin/bash
+easyeffects -a | grep -oP '^Output Preset: \K[\S\s]+'
+# easyeffects -a

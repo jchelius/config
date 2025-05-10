@@ -44,10 +44,13 @@ output DP-4 bg ~/desktop-backgrounds/space/1.jpg fill
 # output DP-3 adaptive_sync on resolution 2660x1440@165.0Hz transform 270
 # output DP-4 adaptive_sync on resolution 2560x1440@165.0Hz  position 1440 550 transform 0
 
-output DP-3 adaptive_sync on resolution 2660x1440@165.0Hz position -1440 -1250 transform 270
-output DP-4 adaptive_sync on resolution 2560x1440@165.0Hz transform 0
+output DP-3 adaptive_sync on resolution 2660x1440@165.0Hz position 0 0 transform 270
+output DP-4 adaptive_sync on resolution 2560x1440@165.0Hz position 1440 500 transform 0
 
 workspace 10 output DP-3
+
+# Start OpenRGB
+exec /usr/bin/openrgb --startminimized --profile "red" --server
 
 ### Idle configuration
 #
@@ -219,19 +222,23 @@ bindsym $mod+r mode "resize"
 #
 # Read `man 5 sway-bar` for more information about this section.
 bar {
-    position top
-
-    # When the status_command prints a new line to stdout, swaybar updates.
-    # The default just shows the current date and time.
-    # status_command while date +'%Y-%m-%d %I:%M:%S %p'; do sleep 1; done
-    status_command SCRIPT_DIR=~/.config/i3blocks i3blocks
-
-    colors {
-        statusline #ffffff
-        background #000000
-        # inactive_workspace #32323200 #32323200 #5c5c5c
-     }
+    swaybar_command waybar
 }
+# bar {
+#     position top
+# 
+#     # When the status_command prints a new line to stdout, swaybar updates.
+#     # The default just shows the current date and time.
+#     # status_command while date +'%Y-%m-%d %I:%M:%S %p'; do sleep 1; done
+#     status_command SCRIPT_DIR=~/.config/i3blocks i3blocks
+# 
+#     colors {
+#         statusline #ffffff
+#         background #000000
+#         # inactive_workspace #32323200 #32323200 #5c5c5c
+#     }
+# 
+# }
 # bar {
 #     swaybar_command waybar
 # }
