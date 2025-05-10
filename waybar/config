@@ -1,4 +1,5 @@
-{
+[{
+    "output": "DP-2",
     "layer": "top",
     "position": "top",
     "height": 30,
@@ -11,8 +12,7 @@
         "temperature",
         "temperature#gpu",
         "memory",
-	"mpris",
-	"custom/easyeffects",
+	"mpris", "custom/easyeffects",
         "pulseaudio",
         "clock",
         "tray",
@@ -116,4 +116,122 @@
 	"format": "{text} 󰺢",
 	"exec": "~/.config/waybar/scripts/easyeffects/getactiveeffect",
    }
-}
+},
+{
+    "output": "DP-3",
+    "layer": "top",
+    "position": "top",
+    "height": 30,
+    "spacing": 4,
+    // "modules-left": ["hyprland/workspaces"],
+    // "modules-center": ["hyprland/window"],
+    "modules-right": [
+        "network",
+        "cpu",
+        "temperature",
+        "temperature#gpu",
+        "memory",
+        "pulseaudio",
+        "clock",
+        "tray",
+    ],
+
+    // "hyprland/workspaces": {
+    // 	"active-only": false,
+    //     "all-outputs": false,
+    //     "format": "{name}",
+    //     "persistent-workspaces": {
+    //         "DP-1": 4
+    //     },
+    //     "format-icons": {
+    //         "active": "",
+    //         "default": ""
+    //     }
+    // },
+
+    "tray": {
+        "icon-size": 20,
+        "spacing": 4
+    },
+
+    "clock": {
+        // "timezone": "America/Los_Angeles",
+	"format": "{:%Y-%m-%d %H:%M}",
+        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+        // "format-alt": "{:%Y-%m-%d}"
+	"format-alt": "{:%H:%M}",
+    },
+
+    "memory": {
+        "format": "{}% ",
+	"tooltip-format": "{used:0.1f} / {total:0.1f}G"
+    },
+
+    "cpu": {
+        "format": "{usage}% {icon}",
+        "format-icons": ["▁", "▂", "▃", "▄", "▅", "▆", "▇", "█"],
+        "interval": 1,
+        "tooltip": true
+    },
+
+    "temperature": {
+        "interval": 1,
+        "hwmon-path-abs": "/sys/devices/platform/coretemp.0/hwmon",
+        "input-filename": "temp1_input",
+        "critical-threshold": 90,
+        "format": "CPU {temperatureC}°C {icon}",
+        "format-icons": ["", "", "", "", ""],
+	"tooltip-format": "Intel Core i9-12900K"
+    },
+
+    "temperature#gpu": {
+        "interval": 1,
+        "hwmon-path-abs": "/sys/devices/pci0000:00/0000:00:01.0/0000:01:00.0/0000:02:00.0/0000:03:00.0/hwmon",
+        "input-filename": "temp1_input",
+        "critical-threshold": 90,
+        "format": "GPU {temperatureC}°C {icon}",
+        "format-icons": ["", "", "", "", ""],
+	"tooltip-format": "AMD RX 7900XTX"
+    },
+
+    "network": {
+        "interval": 1,
+        // "format-ethernet": "󰈀  U {bandwidthUpBits} D {bandwidthDownBits}",
+        "format-ethernet": "U {bandwidthUpBits} D {bandwidthDownBits} 󰈀",
+	// "format-ethernet": "󰈀",
+        "tooltip-format": "{ifname} via {gwaddr} 󰌘",
+        "format-linked": "{ifname} (No IP) 󰌙",
+        "format-disconnected": "Disconnected 󰈂",
+        "format-alt": "{ifname}: {ipaddr}/{cidr}"
+    },
+
+    "pulseaudio": {
+        "format": "{volume}% {icon} {format_source}",
+        "format-muted": " {format_source}",
+        "format-source": "{volume}% ",
+        "format-source-muted": "",
+        "format-icons": {
+            "headphone": "",
+            "headset": "󰋎",
+            "default": ["", "", ""]
+        },
+        "on-click": "pavucontrol"
+    },
+    "mpris": {
+	"format": "{dynamic} {player_icon} ",
+	"format-paused": "{status_icon} <i>{dynamic}</i>",
+	"player-icons": {
+	     "default": "▶",
+	     "mpv": "🎵"
+	},
+	"status-icons": {
+	     "paused": "⏸"
+	},
+	// "ignored-players": ["firefox"]
+   },
+   "custom/easyeffects": {
+   	"interval": 1,
+	"format": "{text} 󰺢",
+	"exec": "~/.config/waybar/scripts/easyeffects/getactiveeffect",
+   }
+}]
