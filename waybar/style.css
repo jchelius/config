@@ -33,48 +33,21 @@ window#waybar {
 }
 
 #workspaces {
-    margin-top: 2px;
-    margin-bottom: 3px;
-    margin-left: 3px;
+    margin: 0;
     color: @fg;
     background-color: @bg;
 }
 
 #workspaces button {
+    margin: 0;
+    padding: 0 2px;
     border-radius: 0;
+    background: #222222;
 }
 
-#workspaces button.active {
-    color: @fg;
-    background: @cyan;
-}
-
-#workspaces button.active:hover {
-    border-color: @cyanh;
-    box-shadow: none; 
-    background: @cyanh;
-}
-
-#workspaces button.empty:hover {
-    color: @fg;
-    border-color: @cyanh;
-    box-shadow: none; 
-    background: @cyanh;
-    text-shadow: unset;
-}
-
-#workspaces button.persistent:hover {
-    color: @fg;
-    border-color: @cyanh;
-    box-shadow: none; 
-    background: @cyanh;
-    text-shadow: unset;
-}
-
-#workspaces button.visible:hover {
-    border-color: @cyanh;
-    box-shadow: none; 
-    background: @cyanh;
+#workspaces button.visible {
+    color: #ffffff;
+    background: #285577;
 }
 
 #custom-easyeffects,
