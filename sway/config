@@ -8,7 +8,7 @@
 #
 # Logo key. Use Mod1 for Alt.
 set $mod Mod4
-# Home row direction keys, like vim
+# Home row direction keys, like vim 
 set $left h
 set $down j
 set $up k
@@ -26,8 +26,8 @@ set $menu rofi -terminal 'alacritty' -show combi -modes combi -combi-modes 'drun
 #
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
 # output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
+output DP-2 bg ~/desktop-backgrounds/space/1.jpg fill
 output DP-3 bg ~/desktop-backgrounds/space/1.jpg fill
-output DP-4 bg ~/desktop-backgrounds/space/1.jpg fill
 #
 # Example configuration:
 #
@@ -44,10 +44,10 @@ output DP-4 bg ~/desktop-backgrounds/space/1.jpg fill
 # output DP-3 adaptive_sync on resolution 2660x1440@165.0Hz transform 270
 # output DP-4 adaptive_sync on resolution 2560x1440@165.0Hz  position 1440 550 transform 0
 
-output DP-3 adaptive_sync on resolution 2660x1440@165.0Hz position 0 0 transform 270
-output DP-4 adaptive_sync on resolution 2560x1440@165.0Hz position 1440 500 transform 0
+output DP-2 adaptive_sync on resolution 2660x1440@165.0Hz position 0 0 transform 270
+output DP-3 adaptive_sync on resolution 2560x1440@165.0Hz position 1440 500 transform 0
 
-workspace 10 output DP-3
+workspace 10 output DP-2
 
 # Start OpenRGB
 exec /usr/bin/openrgb --startminimized --profile "red" --server
@@ -217,17 +217,27 @@ mode "resize" {
 }
 bindsym $mod+r mode "resize"
 
-# Colors
+# Default Colors
 # class                 border  backgr. text    indicator child_border
 client.focused          #4c7899 #285577 #ffffff #2e9ef4   #285577
+# client.focused_inactive #333333 #5f676a #ffffff #484e50   #5f676a
+# client.unfocused        #333333 #222222 #888888 #292d2e   #222222
+# client.urgent           #2f343a #900000 #ffffff #900000   #900000
+# client.placeholder      #000000 #0c0c0c #ffffff #000000   #0c0c0c
+# 
+# client.background       #ffffff
+
+# Colors
+# class                 border  backgr. text    indicator child_border
+# client.focused          #4c7899 #63cdcf #ffffff #2e9ef4   #285577
 client.focused_inactive #333333 #5f676a #ffffff #484e50   #5f676a
 client.unfocused        #333333 #222222 #888888 #292d2e   #222222
 client.urgent           #2f343a #900000 #ffffff #900000   #900000
 client.placeholder      #000000 #0c0c0c #ffffff #000000   #0c0c0c
 
 client.background       #ffffff
-
 #
+
 # Status Bar:
 #
 # Read `man 5 sway-bar` for more information about this section.

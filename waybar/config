@@ -1,5 +1,6 @@
 [{
-    "output": "DP-2",
+    // horizontal monitor
+    "output": "DP-3",
     "layer": "top",
     "position": "top",
     "height": 30,
@@ -46,6 +47,11 @@
 
     "memory": {
         "format": "{}% ",
+        "interval": 1,
+        "states": {
+            "warning": 80,
+            "critical": 90
+        },
 	"tooltip-format": "{used:0.1f} / {total:0.1f}G"
     },
 
@@ -118,7 +124,8 @@
    }
 },
 {
-    "output": "DP-3",
+    // vertical monitor
+    "output": "DP-2",
     "layer": "top",
     "position": "top",
     "height": 30,

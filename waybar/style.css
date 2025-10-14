@@ -2,9 +2,9 @@
 @define-color bg       rgba(0, 0, 0, 0.98);
 @define-color fg       rgba(255, 255, 255, 0.8);
 @define-color black    rgba(57, 59, 68, 0.2);
-@define-color red      rgb(201, 79, 109);
+@define-color red      rgb(255, 0, 0);
 @define-color green    rgb(129, 178, 154);
-@define-color yellow   rgba(219, 192, 116, 0.7);
+@define-color yellow   rgb(255, 255, 0);
 @define-color blue     rgb(113, 156, 214);
 @define-color magenta  rgb(157, 121, 214);
 @define-color cyan     rgba(99, 205, 207, 0.2);
@@ -36,6 +36,7 @@ window#waybar {
     margin: 0;
     color: @fg;
     background-color: @bg;
+    font-family: "JetBrainsMonoNerdFont";
 }
 
 #workspaces button {
@@ -64,6 +65,9 @@ window#waybar {
     padding: 0 6px;
     color: @fg;
 }
+
+#memory.warning { color: @yellow; }
+#memory.critical { color: @red; }
 
 #tray {
     padding: 0 6px;
